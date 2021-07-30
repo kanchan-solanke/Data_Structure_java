@@ -1,69 +1,40 @@
+/*  que:
+You are given N nodes,
+each having unique value ranging from [1, N],
+how many different binary search tree can be created using all of them.
+
+Input
+First line will contain an integer, T, number of test cases.
+ Then T lines follow, where each line represent a test case.
+ Each test case consists a single integer, N, where N is the number of nodes in the binary search tree.
+
+Output
+For each test case, find the number of different binary search trees
+that can be created using these nodes
+// use double to store number because it is factorial
+* */
 import java.util.Scanner;
-
-public class BankSimulation {
-
-    static int amount = 2000;
-    private static BankSimulation Banking;
-
-    public static void Withdraw(int balance) {
-        amount = amount - balance;
-        System.out.println("Withdraw Amount :" + balance);
-        System.out.println("Amount :" + amount);
-    }
-
-    public static void Deposit(int balance) {
-        amount = amount + balance;
-        System.out.println("Deposite Amount :" + balance);
-        System.out.println("Amount :" + amount);
+public class BinarySearchTree_DS {
+    public static double fact(double number)
+    {
+        int fac=1;
+        for(int i=1;i<=number;i++)
+        {
+            fac=fac*i;
+        }
+        return fac;
     }
 
     public static void main(String[] args) {
-        BankSimulation queue = new BankSimulation();
-        int choice;
-        char ch;
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Enter number :");
+        double number=scanner.nextInt();
+        double num1=fact(number*2);
+        double num2=fact(number+1);
+        number=fact(number);
 
-        int data;
-        int balance;
-        do {
-            System.out.println("\n1.Deposite\n2.Withdraw\nEnter Your choice :");
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    System.out.println("Enter Person :");
-                    data = scanner.nextInt();
-                    queue.enqueue(data);
-                    System.out.println("Enter Amount to Deposite");
-                    balance = scanner.nextInt();
-                    Banking.Deposit(balance);
-                    System.out.println("Person Entered :");
-                    queue.dequeue();
-                    System.out.println("Deposited money");
-                    break;
-                case 2:
-                    System.out.println("Enter Person :");
-                    data = scanner.nextInt();
-                    queue.enqueue(data);
-                    System.out.println("Enter Amount to Withdraw ");
-                    balance = scanner.nextInt();
-                    Banking.Withdraw(balance);
-                    System.out.println("Person Entered :");
-                    queue.dequeue();
-                    System.out.println("Withdraw money");
-                    break;
-                default:
-                    System.out.println("You entered wrong choice :");
-            }
-            System.out.println("Do you want to continue :[y/n]");
-            ch = scanner.next().charAt(0);
-        } while (ch == 'Y' || ch == 'y');
-
-    }
-
-    private void dequeue() {
-    }
-
-    private void enqueue(int data) {
+        double value=num1/(num2*number);
+        System.out.println(value+" Tree can be created using  "+number+" nodes");
     }
 
 }
