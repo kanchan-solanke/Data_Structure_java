@@ -1,40 +1,70 @@
-/*  que:
-You are given N nodes,
-each having unique value ranging from [1, N],
-how many different binary search tree can be created using all of them.
+public class PrimeNumber2D
+{
+    private static PrimeNumber2D Prime;
 
-Input
-First line will contain an integer, T, number of test cases.
- Then T lines follow, where each line represent a test case.
- Each test case consists a single integer, N, where N is the number of nodes in the binary search tree.
-
-Output
-For each test case, find the number of different binary search trees
-that can be created using these nodes
-// use double to store number because it is factorial
-* */
-import java.util.Scanner;
-public class BinarySearchTree_DS {
-    public static double fact(double number)
+    public static boolean prime(int number)
     {
-        int fac=1;
-        for(int i=1;i<=number;i++)
+        int i,j,count=0,len=0;
+
+        for(j=1;j<=number;j++)
         {
-            fac=fac*i;
+            if(number%j==0)
+            {
+                count++;
+            }
         }
-        return fac;
+        if(count==2)
+        {
+            return true;
+
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
     public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
-        System.out.println("Enter number :");
-        double number=scanner.nextInt();
-        double num1=fact(number*2);
-        double num2=fact(number+1);
-        number=fact(number);
+// for single array
+        int array[]=new int[168];      //assume num =168
+        int k=1;
+        int i=0;
+        int n=1;
+        while(i<168)
+        {
+            if(Prime.prime(k)==true)
+            {
+                array[i]=k;
+                i++;
+                n++;
+            }
+            k++;
 
-        double value=num1/(num2*number);
-        System.out.println(value+" Tree can be created using  "+number+" nodes");
+
+        }
+  // condition for 2D array
+        int m=0;
+        int array1[][]=new int[10][17];
+        for(int j=0;j<10;j++)
+        {
+            for(int l=0;l<17;l++)
+            {
+                if(array.length>m)
+                {
+                    array1[j][l]=array[m];
+                    m++;
+                }
+            }
+        }
+        for(int j=0;j<10;j++)
+        {
+            for(int l=0;l<17;l++)
+            {
+                System.out.print(array1[j][l]+"\t");
+            }
+            System.out.println("\n");
+        }
     }
 
 }
