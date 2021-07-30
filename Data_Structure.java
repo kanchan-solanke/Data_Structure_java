@@ -1,108 +1,69 @@
 import java.util.Scanner;
 
-class Node {
-    Object data;
-    Node next;
+public class BankSimulation {
 
-    Node() {
+    static int amount = 2000;
+    private static BankSimulation Banking;
 
+    public static void Withdraw(int balance) {
+        amount = amount - balance;
+        System.out.println("Withdraw Amount :" + balance);
+        System.out.println("Amount :" + amount);
     }
 
-    Node(int d) {
-        data = d;
-        next = null;
-    }
-
-    public Node(String n) {
-
-    }
-}
-
-class UnorderedLinkedList {
-    Node head;
-
-    //Inserting data in linkedList
-    public void insert(String n) {
-        Node new_node = new Node(n);
-        if (head == null) {
-            head = new Node(n);
-            return;
-        }
-        new_node.next = null;
-
-        Node lastNode = head;
-        while (lastNode.next != null) {
-            lastNode = lastNode.next;
-        }
-        lastNode.next = new_node;
-
-    }
-
-    public boolean search(Node head, String n) {
-        Node current = head;
-
-        while (current != null) {
-
-            if (current.data.equals(n))
-                return true;
-
-            current = current.next;
-        }
-        return false;
-    }
-
-    //deleting Node
-    void deleteNode(String key) {
-        Node temp = head, prev_node = null;
-        if (temp != null && temp.data == key) {
-            head = temp.next;
-            return;
-        }
-        while (temp != null && temp.data != key) {
-            prev_node = temp;
-            temp = temp.next;
-        }
-
-        prev_node.next = temp.next;
-        System.out.println("Deleted Successfully");
-        display();
-    }
-
-    //Dispalying Data from linkedllist
-    public void display() {
-        Node tempNode = head;
-        while (tempNode != null) {
-            System.out.println(tempNode.data + "");
-            tempNode = tempNode.next;
-        }
+    public static void Deposit(int balance) {
+        amount = amount + balance;
+        System.out.println("Deposite Amount :" + balance);
+        System.out.println("Amount :" + amount);
     }
 
     public static void main(String[] args) {
-        UnorderedLinkedList ul = new UnorderedLinkedList();
-        String word = new String();
-        Scanner scan = new Scanner(System.in);
-        scan = new Scanner(word);
-        String string;
-        int length = word.length();
-        while (scan.hasNext()) {
-            String s = scan.next();
-            ul.insert(s);
-        }
-        System.out.println("Words seperated from text file:\n");
-        ul.display();
-        System.out.println("Enter the word you want to search: ");
+        BankSimulation queue = new BankSimulation();
+        int choice;
+        char ch;
         Scanner scanner = new Scanner(System.in);
-        string = scanner.next();
-        if (ul.search(ul.head, string)) {
-            System.out.println("\nElement Found and deleting element....\n");
-            ul.deleteNode(string);
-        } else {
-            System.out.println("\nElement Not Found, Adding into the list\n");
-            ul.insert(string);
-            System.out.println("Added Successfully");
-            ul.display();
-        }
 
+        int data;
+        int balance;
+        do {
+            System.out.println("\n1.Deposite\n2.Withdraw\nEnter Your choice :");
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter Person :");
+                    data = scanner.nextInt();
+                    queue.enqueue(data);
+                    System.out.println("Enter Amount to Deposite");
+                    balance = scanner.nextInt();
+                    Banking.Deposit(balance);
+                    System.out.println("Person Entered :");
+                    queue.dequeue();
+                    System.out.println("Deposited money");
+                    break;
+                case 2:
+                    System.out.println("Enter Person :");
+                    data = scanner.nextInt();
+                    queue.enqueue(data);
+                    System.out.println("Enter Amount to Withdraw ");
+                    balance = scanner.nextInt();
+                    Banking.Withdraw(balance);
+                    System.out.println("Person Entered :");
+                    queue.dequeue();
+                    System.out.println("Withdraw money");
+                    break;
+                default:
+                    System.out.println("You entered wrong choice :");
+            }
+            System.out.println("Do you want to continue :[y/n]");
+            ch = scanner.next().charAt(0);
+        } while (ch == 'Y' || ch == 'y');
+
+    }
+
+    private void dequeue() {
+    }
+
+    private void enqueue(int data) {
     }
 
 }
