@@ -1,145 +1,85 @@
-//import Queue.QueueImplementedUsingLinkedList;
-//
-//import java.util.Scanner;
-//
-//public class PrimeAnagramUsingQueue {
-//
-//    public static void main(String[] args) {
-//        //scanner class object creation
-//        Scanner sc = new Scanner(System.in);
-//        //input from user
-//        System.out.print("Enter Starting Number : ");
-//        int start = 0;
-//        System.out.print("Enter Ending Number : ");
-//        int end = 1000;
-//        System.out.println("Prime numbers between " + start + " and " + end + " are : ");
-//        int count = 0;
-//        //loop for finding and printing all prime numbers between given range
-//        for (int i = start; i <= end; i++) {
-//            //logic for checking number is prime or not
-//            count = 0;
-//            for (int j = 1; j <= i; j++) {
-//                if (i % j == 0)
-//                    count = count + 1;
-//            }
-//            if (count == 2)
-//                System.out.println(i);
-//
-//        }
-//        // check palindromes
-//
-//        //declare and initialize variables
-//        int temp, i;
-//        int sum = 0;
-//
-//        System.out.println("Enter number to check for anagram");
-//        //get input from user
-//        i = sc.nextInt();
-//
-//        //store number in a temporary variable temp
-//        temp = i;
-//
-//        //use for loop check whether number is prime or not
-//        for (i = 1; i <= temp; i++) {
-//            if (temp % i == 0) {
-//                count++;    //increment counter when the reminder is 0
-//            }
-//            System.out.println(i);  //get prime numbers range 0 - 1000
-//        }
-//
-//    }}
-
-
-import Queue.QueueImplementedUsingLinkedList;
-
-import java.util.Arrays;
-
-public class PrimeAnagramUsingQueue {
-        public boolean isPrime(int num) {
-            for (int i = 2; i < num; i++) {
-                if (num % i == 0) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public static void main(String[] args) {
-            PrimeAnagramUsingQueue queue = new PrimeAnagramUsingQueue();
-            int num = 1;
-            int arr[][] = new int[10][100];
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 100; j++) {
-                    if (queue.isPrime(num)) {
-                        arr[i][j] = num;
-                    } else {
-                        arr[i][j] = -1;
-                    }
-                    num++;
-                }
-            }
-
-            int p = 0;
-            for (int[] k1 : arr) {
-               if  (p < 10) {
-                    if (p == 0)
-                        System.out.print("0 to 100 \t: \t");
-                    else if (p == 1)
-                        System.out.print("100 to 200 \t: \t");
-                    else if (p == 2)
-                        System.out.print("200 to 300 \t: \t");
-                    else if (p == 3)
-                        System.out.print("300 to 400 \t: \t");
-                    else if (p == 4)
-                        System.out.print("400 to 500 \t: \t");
-                    else if (p == 5)
-                        System.out.print("500 to 600 \t: \t");
-                    else if (p == 6)
-                        System.out.print("600 to 700 \t: \t");
-                    else if (p == 7)
-                        System.out.print("700 to 800 \t: \t");
-                    else if (p == 8)
-                        System.out.print("800 to 900 \t: \t");
-                    else if (p == 9)
-                        System.out.print("900 to 1000 \t: \t");
-                    else
-                        System.out.print("Can't Print More Rows");
-                }
-                p++;
+import java.util.Scanner;
 /*
-Create count arrays of size 256 for both strings.
-Initialize all values in count arrays as 0.
-Iterate through every character of both strings
-and increment the count of character in the corresponding count arrays.
-Compare count arrays.
-If both count arrays are same, then return true.
-              */
-                for (int k2 : k1) {
-                    if (k2 != -1 && k2 != 1) {
-                        String str = "" + num;
-                        char[] arr1 = str.toCharArray();
-                        int flag = 0;
-                        for (int i = 0; i <= arr1.length - 1; i++) {
-                            if (arr1[i] != arr1[arr1.length - i - 1]) {
-                                flag = 1;
-                                break;
-                            }
-                        }
-                        if (flag == 1) {
-                            System.out.println(k2+"Not Anagram");}
-                        else
-                            System.out.println(k2 + "Anagram");
-                        ;
-                    }
+Read in the month (m), day (d), and year (y) and print out what
+ *  day of the week it falls on according to the Gregorian calendar.
+ *  For M use 1 for January, 2 for February, and so forth. Outputs
+ *  0 for Sunday, 1 for Monday, and so forth.
+ *
+ *        y0 = y - (14 - m) / 12
+ *        x = y0 + y0/4 - y0/100 + y0/400
+ *        m0 = m + 12 * ((14 - m) / 12) - 2
+ *        d = (d + x + (31*m0)/12) mod 7
+ *
+ *
+ *eg.  % java DayOfWeek 8 2 1953      // August 2, 1953
+ *  0                              // Sunday
+ *
+ * eg. % java DayOfWeek 1 1 2000      // January 1, 2000
+ *  6                              // Saturday
+ *
+* */
+public class Calendar {
+    public static int dayOfWeek(int d, int m, int y) {
+        int y1 = y - (14 - m) / 12;
+        int x1 = (y1 + y1 / 4) - (y1 / 100) + y1 / 400;   //leap year condition
+        int m1 = m + 12 * ((14 - m) / 12) - 2;
+        int d1 = (d + x1 + 31 * (m1 / 12)) % 7;
+        return d1;
+    }
 
+    public void printCalendar(int month, int year) {
+        String[] Months = {"January", "February", "March", "April", "May", "June", "July", "August",
+                "September", "October", "November", "December"};
 
-                }
-                System.out.println("\n");
+        int[] noOfDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+        int result = dayOfWeek(1, month, year);
 
+        System.out.println("\n" + "   " + Months[month - 1] + "  " + year);
 
+        // condition for feb nd if leap year 29 days
+        if (month == 2 && isLeapYearForCalender(year)) {
+            noOfDays[2] = 29;
+        }
+        System.out.println("S  M  T  W  T  F  S ");
+        //day of week loop
+        for (int i = 0; i < result; i++) {
+            System.out.print("   ");
+        }
+        //month loop
+        for (int i = 1; i <= noOfDays[month]; i++) {
+            if (i <= 9) {
+                System.out.print(i + "  ");
+            } else {
+                System.out.print(i + " ");
+            }
+            if ((result + i) % 7 == 0) {              //week=7
+                System.out.println();
             }
 
-
         }
+
     }
+
+
+    public static boolean isLeapYearForCalender(int year) {
+        if (year % 4 == 0 || year % 400 == 0 && year % 100 != 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Month ");
+        int month = scanner.nextInt();
+        System.out.println("enter Year ");
+        int year = scanner.nextInt();
+        Calendar calendar = new Calendar();
+        calendar.printCalendar(month, year);
+    }
+
+
+}
